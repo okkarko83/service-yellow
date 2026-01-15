@@ -3,8 +3,8 @@
 # identify the chart, its version, and the application version it deploys.
 
 apiVersion: v2
-name: poc-svc-green
-description: A Helm chart for deploying poc-svc-green to Kubernetes.
+name: poc-svc-yellow
+description: A Helm chart for deploying poc-svc-yellow to Kubernetes.
 
 # The type of chart. 'application' is the most common.
 type: application
