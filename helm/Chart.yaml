@@ -1,0 +1,18 @@
+# Chart.yaml
+# This file contains the metadata for your Helm chart. It's used by Helm to
+# identify the chart, its version, and the application version it deploys.
+
+apiVersion: v2
+name: poc-svc-green
+description: A Helm chart for deploying poc-svc-green to Kubernetes.
+
+# The type of chart. 'application' is the most common.
+type: application
+
+# This is the version of the chart itself. Increment this when you change
+# the templates, not just the application code.
+version: 0.1.0
+
+# This is the version of the application this chart deploys.
+# It's a good practice to keep this in sync with your application's version tag.
+appVersion: "1.0.0"

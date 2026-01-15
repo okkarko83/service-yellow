@@ -1,0 +1,51 @@
+<!-- service-yellow/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service {{ service_name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .status-up {
+            color: #22c55e; /* green-500 */
+        }
+        .status-down {
+            color: #ef4444; /* red-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-yellow-500 mb-4">Service {{ service_name }}</h1>
+            <div class="bg-yellow-100 text-yellow-800 text-lg font-semibold rounded-lg px-6 py-3 mb-8 inline-block">
+                I'm Service {{ service_name }} and version is {{ version }}
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Peer Service Status</h2>
+            <div class="space-y-4">
+                {% for name, data in peers.items() %}
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <span class="text-lg font-medium text-gray-800 capitalize">Service {{ name }}</span>
+                    <div>
+                        <span class="font-bold text-lg {{ 'status-up' if data.status == 'up' else 'status-down' }}">
+                            {{ data.status.upper() }}
+                        </span>
+                        <span class="text-gray-500 ml-4">
+                            (Version: {{ data.version }})
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
