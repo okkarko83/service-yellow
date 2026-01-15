@@ -46,3 +46,23 @@ resources:
   requests:
     cpu: "200m"
     memory: "256Mi"
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /health
+    port: 5000
+  initialDelaySeconds: 300
+  periodSeconds: 20
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /health
+    port: 5000
+  initialDelaySeconds: 300
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
