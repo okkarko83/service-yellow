@@ -37,7 +37,7 @@ service:
 
 istio:
   enabled: true
-  gatewayName: "argocd-gateway"
+  gatewayName: "poc-apps-gateway"
   host: "yellow.local"
 
 resources:
