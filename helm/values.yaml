@@ -24,7 +24,8 @@ serviceAccount:
   name: ""
 
 env:
-  PEER_SERVICES: "blue:http://poc-svc-blue,green:http://poc-svc-green"
+  - name: PEER_SERVICES
+    value: "blue:http://poc-svc-blue,green:http://poc-svc-green"
 
 service:
   type: ClusterIP
