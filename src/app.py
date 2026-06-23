@@ -5,6 +5,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 def get_peer_services():
     """
     Parses peer services from the PEER_SERVICES environment variable.
@@ -13,15 +14,16 @@ def get_peer_services():
     """
     peers = {}
     peer_env = os.getenv('PEER_SERVICES')
-    
+
     if not peer_env:
         # Fallback to a default if the environment variable is not set
-        print("Warning: PEER_SERVICES environment variable not set. Using default peers.")
+        print("Warning: PEER_SERVICES environment variable not set. "
+              "Using default peers.")
         return {
             "blue": "http://service-blue:5000",
             "green": "http://service-green:5001",
         }
-    
+
     try:
         for peer in peer_env.split(','):
             # Split only on the first colon to handle URLs with colons
@@ -29,10 +31,13 @@ def get_peer_services():
             peers[name.strip()] = url.strip()
         return peers
     except ValueError:
-        print(f"Warning: Malformed PEER_SERVICES environment variable: '{peer_env}'. Using empty peer list.")
+        print(f"Warning: Malformed PEER_SERVICES environment variable: "
+              f"'{peer_env}'. Using empty peer list.")
         return {}
 
+
 PEER_SERVICES = get_peer_services()
+
 
 def get_version():
     """Reads the version from the version.txt file."""
@@ -41,6 +46,7 @@ def get_version():
             return f.read().strip()
     except FileNotFoundError:
         return "N/A"
+
 
 def get_peer_status(service_name, service_url):
     """Checks the health of a peer service and gets its version."""
@@ -52,6 +58,7 @@ def get_peer_status(service_name, service_url):
         return "down", "N/A"
     except requests.exceptions.RequestException:
         return "down", "N/A"
+
 
 @app.route('/')
 def home():
@@ -69,10 +76,12 @@ def home():
         peers=peer_statuses
     )
 
+
 @app.route('/health')
 def health_check():
     """Provides a health check endpoint."""
     return {"status": "up", "version": get_version()}
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
