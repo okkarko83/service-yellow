@@ -1,0 +1,21 @@
+name: Git Compliance Check
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  compliance:
+    name: Git Compliance Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+
+      - name: Run Compliance Check
+        run: python3 .github/scripts/git_compliance_check.py
